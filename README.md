@@ -52,3 +52,6 @@ Currently supported Auth Points:
 
 ### Authentication
 TODO
+
+## Tests
+To ensure that the IAM service works correctly, the project includes a Postman collection in the `/tests` folder.
