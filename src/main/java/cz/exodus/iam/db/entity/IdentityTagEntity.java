@@ -12,11 +12,8 @@ import lombok.*;
 @Table(name = "IDENTITY_TAG")
 public class IdentityTagEntity {
 
-    static final String SEQ_NAME = "IDENTITY_TAG_ID_SEQ";
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
-    @SequenceGenerator(sequenceName = SEQ_NAME, name = SEQ_NAME, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     Long id;
 

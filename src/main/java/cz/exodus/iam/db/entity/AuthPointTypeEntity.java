@@ -12,10 +12,8 @@ import lombok.*;
 @Table(name = "AUTH_POINT_TYPE")
 public class AuthPointTypeEntity {
 
-    static final String SEQ_NAME = "AUTH_POINT_TYPE_ID_SEQ";
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     Long id;
 
