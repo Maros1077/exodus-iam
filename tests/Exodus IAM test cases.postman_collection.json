@@ -1,0 +1,6319 @@
+{
+	"info": {
+		"_postman_id": "c20dd193-594e-4026-9ad6-790b8fa76171",
+		"name": "Exodus test cases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25286484"
+	},
+	"item": [
+		{
+			"name": "IAM /create",
+			"item": [
+				{
+					"name": "OK flow - 200",
+					"item": [
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create 2 tags",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    {\r\n      \"type\": \"nick\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create tags and authPoint",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    {\r\n      \"type\": \"nick\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"testpwd\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create authPoint with no value",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create 2 authPoins",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"pwd\"\r\n    },\r\n        {\r\n      \"type\": \"OTP\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "identity already exists - 1003- FAIL",
+					"item": [
+						{
+							"name": "IAM create first",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create again",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1003);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "tag type not exists - 1004 - FAIL",
+					"item": [
+						{
+							"name": "IAM create tagType",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"        pm.expect(jsonData.data.code).to.eql(1004);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"NONE\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "application does not exists - 1005 - FAIL",
+					"item": [
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"doesnotexist\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1005);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth point type not exists - 1007 - FAIL",
+					"item": [
+						{
+							"name": "IAM create authPoint",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1007);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"NONE\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth point and tag type duplicite - 1009 - FAIL",
+					"item": [
+						{
+							"name": "IAM create authPoint",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"        pm.expect(jsonData.data.code).to.eql(1009);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\"\r\n    },\r\n    {\r\n      \"type\": \"PASSWORD\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create tagType",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"        pm.expect(jsonData.data.code).to.eql(1009);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "IAM /retrieve",
+			"item": [
+				{
+					"name": "OK flow - 200",
+					"item": [
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    var email = pm.environment.get(\"email\")\r",
+											"    console.log(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"    \r",
+											"    const emailTag = jsonData.data.tags.find(tag => tag.type === \"EMAIL\");\r",
+											"    const emailValue = emailTag ? emailTag.value : null;\r",
+											"    pm.expect(emailValue).to.eql(email)\r",
+											"    \r",
+											"    const ididTag = jsonData.data.tags.find(tag => tag.type === \"IDID\");\r",
+											"    const ididValue = ididTag ? ididTag.value : null;\r",
+											"    pm.expect(ididValue).to.eql(idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveTags\": true,\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create 2 tags",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    {\r\n      \"type\": \"nick\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve 2 tags",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    var email = pm.environment.get(\"email\")\r",
+											"    console.log(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"    \r",
+											"    const emailTag = jsonData.data.tags.find(tag => tag.type === \"EMAIL\");\r",
+											"    const emailValue = emailTag ? emailTag.value : null;\r",
+											"    pm.expect(emailValue).to.eql(email)\r",
+											"    \r",
+											"    const ididTag = jsonData.data.tags.find(tag => tag.type === \"IDID\");\r",
+											"    const ididValue = ididTag ? ididTag.value : null;\r",
+											"    pm.expect(ididValue).to.eql(idid)\r",
+											"\r",
+											"    const nickTag = jsonData.data.tags.find(tag => tag.type === \"NICK\");\r",
+											"    const nickValue = nickTag ? nickTag.value : null;\r",
+											"    pm.expect(nickValue).to.eql(email)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveTags\": true,\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create tags and authPoint",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    {\r\n      \"type\": \"nick\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"testpwd\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve tags and authPoint",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    var email = pm.environment.get(\"email\")\r",
+											"    console.log(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"    \r",
+											"    const emailTag = jsonData.data.tags.find(tag => tag.type === \"EMAIL\");\r",
+											"    const emailValue = emailTag ? emailTag.value : null;\r",
+											"    pm.expect(emailValue).to.eql(email)\r",
+											"    \r",
+											"    const ididTag = jsonData.data.tags.find(tag => tag.type === \"IDID\");\r",
+											"    const ididValue = ididTag ? ididTag.value : null;\r",
+											"    pm.expect(ididValue).to.eql(idid)\r",
+											"\r",
+											"    const nickTag = jsonData.data.tags.find(tag => tag.type === \"NICK\");\r",
+											"    const nickValue = nickTag ? nickTag.value : null;\r",
+											"    pm.expect(nickValue).to.eql(email)\r",
+											"\r",
+											"    pm.expect(jsonData.data?.authPoints?.includes(\"PASSWORD\")).to.eql(true);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveTags\": true,\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create 2 authPoints",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    {\r\n      \"type\": \"nick\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"testpwd\"\r\n    },\r\n    {\r\n      \"type\": \"OTP\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve 2 authPoints",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    var email = pm.environment.get(\"email\")\r",
+											"    console.log(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"    \r",
+											"    const emailTag = jsonData.data.tags.find(tag => tag.type === \"EMAIL\");\r",
+											"    const emailValue = emailTag ? emailTag.value : null;\r",
+											"    pm.expect(emailValue).to.eql(email)\r",
+											"    \r",
+											"    const ididTag = jsonData.data.tags.find(tag => tag.type === \"IDID\");\r",
+											"    const ididValue = ididTag ? ididTag.value : null;\r",
+											"    pm.expect(ididValue).to.eql(idid)\r",
+											"\r",
+											"    const nickTag = jsonData.data.tags.find(tag => tag.type === \"NICK\");\r",
+											"    const nickValue = nickTag ? nickTag.value : null;\r",
+											"    pm.expect(nickValue).to.eql(email)\r",
+											"    pm.expect(jsonData.data.tags.length).to.eql(3);\r",
+											"\r",
+											"    pm.expect(jsonData.data?.authPoints?.includes(\"PASSWORD\")).to.eql(true);\r",
+											"    pm.expect(jsonData.data?.authPoints?.includes(\"OTP\")).to.eql(true);\r",
+											"    pm.expect(jsonData.data?.authPoints?.length).to.eql(2);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveTags\": true,\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve only tags",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    var email = pm.environment.get(\"email\")\r",
+											"    console.log(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"    \r",
+											"    const emailTag = jsonData.data.tags.find(tag => tag.type === \"EMAIL\");\r",
+											"    const emailValue = emailTag ? emailTag.value : null;\r",
+											"    pm.expect(emailValue).to.eql(email)\r",
+											"    \r",
+											"    const ididTag = jsonData.data.tags.find(tag => tag.type === \"IDID\");\r",
+											"    const ididValue = ididTag ? ididTag.value : null;\r",
+											"    pm.expect(ididValue).to.eql(idid)\r",
+											"\r",
+											"    const nickTag = jsonData.data.tags.find(tag => tag.type === \"NICK\");\r",
+											"    const nickValue = nickTag ? nickTag.value : null;\r",
+											"    pm.expect(nickValue).to.eql(email)\r",
+											"\r",
+											"    pm.expect(jsonData.data.authPoints).to.eql(undefined);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveTags\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8081/iam/v1/int/retrieve",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve only authPoints",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    var email = pm.environment.get(\"email\")\r",
+											"    console.log(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.data.tags).to.eql(undefined);\r",
+											"    \r",
+											"    pm.expect(jsonData.data?.authPoints?.includes(\"PASSWORD\")).to.eql(true);\r",
+											"    pm.expect(jsonData.data?.authPoints?.includes(\"OTP\")).to.eql(true);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create no auth points",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve no authPoints",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    var email = pm.environment.get(\"email\")\r",
+											"    console.log(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.data.tags).to.eql(undefined);\r",
+											"    \r",
+											"    pm.expect(jsonData.data.authPoints).to.eql([]);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "tag type not exists - 1004 - FAIL Copy",
+					"item": [
+						{
+							"name": "IAM create 2 tags and points",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    {\r\n      \"type\": \"nick\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"testpwd\"\r\n    },\r\n    {\r\n      \"type\": \"OTP\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1004);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"tag\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveTags\": true,\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "identity not found - 1002",
+					"item": [
+						{
+							"name": "IAM retrieve",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1002);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"NOT_EXIST\"\r\n    },\r\n  \"retrieveTags\": true,\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "application does not exists - 1005 - FAIL Copy",
+					"item": [
+						{
+							"name": "IAM retrieve",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1005);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"not_exist\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveTags\": true,\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "IAM /update",
+			"item": [
+				{
+					"name": "OK flow - 200",
+					"item": [
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"newEmail\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"exodus\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"tags\": [\r\n    {\r\n      \"operation\": \"UPDATE\",\r\n      \"type\": \"email\",\r\n      \"newValue\": \"{{newEmail}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    var newEmail = pm.environment.get(\"newEmail\")\r",
+											"    console.log(idid)\r",
+											"    console.log(newEmail)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"    \r",
+											"    const emailTag = jsonData.data.tags.find(tag => tag.type === \"EMAIL\");\r",
+											"    const emailValue = emailTag ? emailTag.value : null;\r",
+											"    pm.expect(emailValue).to.eql(newEmail)\r",
+											"    \r",
+											"    const ididTag = jsonData.data.tags.find(tag => tag.type === \"IDID\");\r",
+											"    const ididValue = ididTag ? ididTag.value : null;\r",
+											"    pm.expect(ididValue).to.eql(idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{newEmail}}\"\r\n    },\r\n  \"retrieveTags\": true,\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM update auth point",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.affectedTags).to.eql(0);\r",
+											"    pm.expect(jsonData.data.affectedAuthPoints).to.eql(1);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"exodus\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"authPoints\": [\r\n    {\r\n      \"operation\": \"UPDATE\",\r\n      \"type\": \"PASSWORD\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve authpoints",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    console.log(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.data.tags).to.eql(undefined);\r",
+											"    \r",
+											"    pm.expect(jsonData.data?.authPoints?.includes(\"PASSWORD\")).to.eql(true);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    {\r\n      \"type\": \"nick\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM update nick with value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.affectedTags).to.eql(1);\r",
+											"    pm.expect(jsonData.data.affectedAuthPoints).to.eql(0);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"newEmail\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"exodus\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"tags\": [\r\n    {\r\n      \"operation\": \"UPDATE\",\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\",\r\n      \"newValue\": \"{{newEmail}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve nick with value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    var newEmail = pm.environment.get(\"newEmail\")\r",
+											"    console.log(idid)\r",
+											"    console.log(newEmail)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"    \r",
+											"    const emailTag = jsonData.data.tags.find(tag => tag.type === \"EMAIL\");\r",
+											"    const emailValue = emailTag ? emailTag.value : null;\r",
+											"    pm.expect(emailValue).to.eql(newEmail)\r",
+											"    \r",
+											"    const ididTag = jsonData.data.tags.find(tag => tag.type === \"IDID\");\r",
+											"    const ididValue = ididTag ? ididTag.value : null;\r",
+											"    pm.expect(ididValue).to.eql(idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{newEmail}}\"\r\n    },\r\n  \"retrieveTags\": true,\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    {\r\n      \"type\": \"nick\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM update nick with wrong value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.affectedTags).to.eql(0);\r",
+											"    pm.expect(jsonData.data.affectedAuthPoints).to.eql(0);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"newEmail\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"exodus\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"tags\": [\r\n    {\r\n      \"operation\": \"UPDATE\",\r\n      \"type\": \"email\",\r\n      \"value\": \"zleEmail\",\r\n      \"newValue\": \"{{newEmail}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve nick with wrong value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    var email = pm.environment.get(\"email\")\r",
+											"    console.log(idid)\r",
+											"    console.log(email)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"    \r",
+											"    const emailTag = jsonData.data.tags.find(tag => tag.type === \"EMAIL\");\r",
+											"    const emailValue = emailTag ? emailTag.value : null;\r",
+											"    pm.expect(emailValue).to.eql(email)\r",
+											"    \r",
+											"    const ididTag = jsonData.data.tags.find(tag => tag.type === \"IDID\");\r",
+											"    const ididValue = ididTag ? ididTag.value : null;\r",
+											"    pm.expect(ididValue).to.eql(idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveTags\": true,\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "OK flow - 200 delete",
+					"item": [
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    {\r\n      \"type\": \"nick\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"newEmail\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"exodus\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"tags\": [\r\n    {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"NICK\",\r\n      \"newValue\": \"{{newEmail}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    var newEmail = pm.environment.get(\"newEmail\")\r",
+											"    console.log(idid)\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"    \r",
+											"    const emailTag = jsonData.data.tags.find(tag => tag.type === \"NICK\");\r",
+											"    const emailValue = emailTag ? emailTag.value : null;\r",
+											"    pm.expect(emailValue).to.eql(null)\r",
+											"    \r",
+											"    const ididTag = jsonData.data.tags.find(tag => tag.type === \"IDID\");\r",
+											"    const ididValue = ididTag ? ididTag.value : null;\r",
+											"    pm.expect(ididValue).to.eql(idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveTags\": true,\r\n  \"retrieveAuthPoints\": true\r\n}s",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n  \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"testpwd\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM delete auth point",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.affectedAuthPoints).to.eql(1);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"exodus\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"authPoints\": [\r\n    {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"PASSWORD\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve deleted authpoints",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    console.log(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"    \r",
+											"    pm.expect(jsonData.data.authPoints.includes(\"PASSWORD\")).to.eql(false);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM delete wrong  auth point",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.affectedAuthPoints).to.eql(0);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"exodus\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"authPoints\": [\r\n    {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"OTP\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve non-deletedauthpoints",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    console.log(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"    \r",
+											"    pm.expect(jsonData.data.authPoints.includes(\"OTP\")).to.eql(false);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveAuthPoints\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    {\r\n      \"type\": \"nick\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM delete by value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.affectedTags).to.eql(1);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"exodus\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"tags\": [\r\n    {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"NICK\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve deleted tags",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var idid = pm.environment.get(\"idid\")\r",
+											"    console.log(idid)\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.eql(idid)\r",
+											"    pm.expect(jsonData.data?.tags?.includes(\"NICK\")).to.eql(false);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveTags\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    {\r\n      \"type\": \"nick\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM delete by non-existing value",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.affectedTags).to.eql(0);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"exodus\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"tags\": [\r\n    {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"NICK\",\r\n      \"value\": \"not_exist_value\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM retrieve non-deleted tags",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var email = pm.environment.get(\"email\")\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    const nickTag = jsonData.data.tags.find(tag => tag.type === \"NICK\");\r",
+											"    const nickValue = nickTag ? nickTag.value : null;\r",
+											"    pm.expect(nickValue).to.eql(email)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"retrieveTags\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/retrieve",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"retrieve"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "tag type not exists - 1004 - FAIL",
+					"item": [
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1004);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"exodus\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"tags\": [\r\n    {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"NONEXIST\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "application does not exists - 1005 - FAIL",
+					"item": [
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1005);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"NONEXIST\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"tags\": [\r\n    {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"NICK\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth point type not exists - 1007 - FAIL Copy",
+					"item": [
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1007);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"authPoints\": [\r\n    {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"NON_EXIST\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth point and tag type duplicite - 1009 - FAIL",
+					"item": [
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM update auth points",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1009);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"authPoints\": [\r\n    {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"PASSWORD\"\r\n    },\r\n        {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"PASSWORD\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM update tags",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1009);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"tags\": [\r\n    {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"NICK\"\r\n    },\r\n        {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"NICK\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "identity not found - 1002",
+					"item": [
+						{
+							"name": "IAM update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1002);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"NON_EXIST\"\r\n    },\r\n  \"tags\": [\r\n    {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"NICK\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "idid can not be deleted - 1000 - FAIL",
+					"item": [
+						{
+							"name": "IAM create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1000);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"exodus\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"tags\": [\r\n    {\r\n      \"operation\": \"DELETE\",\r\n      \"type\": \"IDID\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "IAM /auth PWD",
+			"item": [
+				{
+					"name": "OK flow -200",
+					"item": [
+						{
+							"name": "IAM create authPoint",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"function generatePwd() {\r",
+											"    let start = \"myStrong\"\r",
+											"    let end = \"passwords\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return start + number + end;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"pwd\", generatePwd());\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"{{pwd}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM auth",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.token).to.not.be.null;\r",
+											"    pm.expect(jsonData.data.expiration).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n   \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    \"authPoint\": {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"{{pwd}}\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/auth",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM create without value",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"// Get generated value\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n      \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM update auth point",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.affectedTags).to.eql(0);\r",
+											"    pm.expect(jsonData.data.affectedAuthPoints).to.eql(1);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"exodus\",\r\n  \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n  \"authPoints\": [\r\n    {\r\n      \"operation\": \"UPDATE\",\r\n      \"type\": \"PASSWORD\",\r\n      \"newValue\": \"{{pwd}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/update",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM auth",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.token).to.not.be.null;\r",
+											"    pm.expect(jsonData.data.expiration).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n   \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    \"authPoint\": {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"{{pwd}}\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/auth",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "tag type not exists - 1004 - FAIL",
+					"item": [
+						{
+							"name": "IAM create authPoint",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"function generatePwd() {\r",
+											"    let start = \"myStrong\"\r",
+											"    let end = \"passwords\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return start + number + end;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"pwd\", generatePwd());\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"{{pwd}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM auth",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1004);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n   \"identificationTag\": {\r\n      \"type\": \"NON_EXIST\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    \"authPoint\": {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"{{pwd}}\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/auth",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "application does not exists - 1005 - FAIL",
+					"item": [
+						{
+							"name": "IAM create authPoint",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"function generatePwd() {\r",
+											"    let start = \"myStrong\"\r",
+											"    let end = \"passwords\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return start + number + end;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"pwd\", generatePwd());\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"{{pwd}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM auth",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1005);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"NOT_EXIST\",\r\n   \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    \"authPoint\": {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"{{pwd}}\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/auth",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth point type not exists - 1007 - FAIL",
+					"item": [
+						{
+							"name": "IAM create authPoint",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"function generatePwd() {\r",
+											"    let start = \"myStrong\"\r",
+											"    let end = \"passwords\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return start + number + end;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"pwd\", generatePwd());\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"{{pwd}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM auth",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1007);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n   \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    \"authPoint\": {\r\n      \"type\": \"NON_EXIST\",\r\n      \"value\": \"{{pwd}}\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/auth",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "authentication failed - 1001 - FAIL",
+					"item": [
+						{
+							"name": "IAM create authPoint",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"function generatePwd() {\r",
+											"    let start = \"myStrong\"\r",
+											"    let end = \"passwords\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return start + number + end;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"pwd\", generatePwd());\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n    \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"{{pwd}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM auth wrong pwd",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1001);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n   \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    \"authPoint\": {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"WRONG_PWD\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/auth",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM auth wrong identity",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1001);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n   \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"WRONG_IDENTITY\"\r\n    },\r\n    \"authPoint\": {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"{{pwd}}\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/auth",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth point not set - 1010 - FAIL",
+					"item": [
+						{
+							"name": "IAM create without value Copy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM auth",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1010);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n   \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    \"authPoint\": {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"pwd\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/auth",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth point value not set - 1011 - FAIL",
+					"item": [
+						{
+							"name": "IAM create without value Copy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.globals.clear();\r",
+											"pm.environment.unset(\"email\");\r",
+											"pm.environment.set(\"application\", \"exodus\");\r",
+											"\r",
+											"function generateEmail() {\r",
+											"    let name = \"test\"\r",
+											"    let domain = \"@email.com\"\r",
+											"    let number = Math.round(Math.random() * (10000 - 1) + 1);\r",
+											"    return name + number + domain;\r",
+											"};\r",
+											"\r",
+											"pm.environment.set(\"email\",generateEmail());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+											"    pm.expect(jsonData.data.idid).to.not.be.null;\r",
+											"    pm.environment.set(\"idid\", jsonData.data.idid);\r",
+											"    console.log(jsonData.data.idid)\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n  \"tags\": [\r\n    {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    }\r\n  ],\r\n      \"authPoints\": [\r\n    {\r\n      \"type\": \"PASSWORD\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/create",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IAM auth",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Data in response\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.status).to.eql(\"fail\");\r",
+											"    pm.expect(jsonData.data.code).to.eql(1011);\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"application\": \"{{application}}\",\r\n   \"identificationTag\": {\r\n      \"type\": \"email\",\r\n      \"value\": \"{{email}}\"\r\n    },\r\n    \"authPoint\": {\r\n      \"type\": \"PASSWORD\",\r\n      \"value\": \"pwd\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Host}}{{Port}}/iam/v1/int/auth",
+									"host": [
+										"{{Host}}{{Port}}"
+									],
+									"path": [
+										"iam",
+										"v1",
+										"int",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
