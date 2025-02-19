@@ -64,7 +64,7 @@ public class IAMController {
     public AuthResponse auth(@RequestBody AuthRequest request, HttpServletResponse response) throws IAMException {
         log.debug("AUTH START");
         try {
-            AuthResponse result = iamService.auth(request.getIdentificationTag(), request.getAuthPoint(), request.getApplication());
+            AuthResponse result = iamService.auth(request.getIdentificationTag(), request.getAuthPoint(), request.getApplication(), request.getClientId(), request.getGrantType(),  request.getScope());
             log.info("AUTH SUCCESSFUL for " + request.getIdentificationTag().getValue());
             return result;
         } catch (IAMException e) {

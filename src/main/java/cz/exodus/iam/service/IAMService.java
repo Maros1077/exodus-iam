@@ -1,5 +1,10 @@
 package cz.exodus.iam.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import cz.exodus.iam.client.STSClient;
+import cz.exodus.iam.client.model.IssueRequest;
+import cz.exodus.iam.client.model.IssueResponse;
 import cz.exodus.iam.db.entity.*;
 import cz.exodus.iam.db.model.AuthPointType;
 import cz.exodus.iam.db.model.IdentityOperationType;
@@ -16,6 +21,8 @@ import cz.exodus.iam.rest.UpdateIdentityResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -37,9 +44,11 @@ public class IAMService {
     private final ApplicationRepository applicationRepository;
     private final AuthPointTypeRepository authPointTypeRepository;
     private final IdentityAuthPointRepository identityAuthPointRepository;
+    private final OidcClientRepository oidcClientRepository;
 
     @Autowired
     private final BCryptPasswordEncoder passwordEncoder;
+    private final STSClient stsClient;
 
     @Transactional(rollbackOn = IAMException.class)
     public CreateIdentityResponse createIdentity(List<IdentityTag> tags, List<AuthPoint> authPoints, String application) throws IAMException {
@@ -125,8 +134,11 @@ public class IAMService {
         return new UpdateIdentityResponse(affectedTags, affectedAuthPoints);
     }
 
-    public AuthResponse auth(IdentityTag identificationTag, AuthPoint authPoint, String application) throws IAMException {
+    public AuthResponse auth(IdentityTag identificationTag, AuthPoint authPoint, String application, String clientId, String grantType, String scope) throws IAMException {
         ApplicationEntity applicationEntity = getApplication(application);
+        if (!oidcClientRepository.existsOidcClientEntityByApplicationAndClientIdAndGrantType(applicationEntity, clientId, grantType)) {
+            throw new OidcClientDoesNotExistsException(clientId, application);
+        }
         IdentityTagEntity identityTag;
         try {
             identityTag = getIdentity(identificationTag, applicationEntity);
@@ -136,8 +148,13 @@ public class IAMService {
         }
         AuthPointTypeEntity authPointTypeEntity = getAuthByType(authPoint.getType());
         if (isAuthPointValueMatching(identityTag.getIdentity(), authPointTypeEntity, authPoint.getValue(), applicationEntity)) {
-            // TODO - call to STS
-            return new AuthResponse("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c", 3600);
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectNode metadata = objectMapper.createObjectNode();
+            metadata.put("tagType", identificationTag.getType());
+            metadata.put("application", application);
+
+            IssueResponse response = stsClient.issueToken(new IssueRequest(clientId, scope, grantType, identityTag.getTagValue(), metadata)).block();
+            return new AuthResponse(response.getToken(), response.getType(), response.getExpiresIn());
         } else {
             log.debug("Authentication failed - Wrong value");
             throw new AuthenticationFailedException();

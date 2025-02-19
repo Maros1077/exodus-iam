@@ -106,3 +106,23 @@ ALTER TABLE EXODUS_IAM.identity_tag ADD CONSTRAINT identity_tag_unique_per_appli
 CREATE TABLE `identity_tag_seq` (
   `next_val` bigint unsigned DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- EXODUS_IAM.oidc_client_seq definition
+
+CREATE TABLE `oidc_client_seq` (
+  `next_val` bigint DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- EXODUS_IAM.oidc_client definition
+
+CREATE TABLE `oidc_client` (
+  `id` bigint NOT NULL,
+  `application_id` bigint unsigned NOT NULL,
+  `client_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `grant_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK44ed4ascp2fpbfl44curgd14q` (`application_id`),
+  UNIQUE KEY `oidc_client_unique` (`application_id`,`client_id`,`grant_type`),
+  CONSTRAINT `FK44ed4ascp2fpbfl44curgd14q` FOREIGN KEY (`application_id`) REFERENCES `application` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

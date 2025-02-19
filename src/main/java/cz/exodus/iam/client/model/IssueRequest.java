@@ -1,33 +1,31 @@
-package cz.exodus.iam.rest;
+package cz.exodus.iam.client.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import cz.exodus.iam.model.AuthPoint;
-import cz.exodus.iam.model.IdentityTag;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.json.JSONObject;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthRequest {
-
-    @JsonProperty(required = true)
-    String application;
-
-    @JsonProperty(required = true)
-    IdentityTag identificationTag;
-
-    @JsonProperty(required = true)
-    AuthPoint authPoint;
-
-    @JsonProperty(required = true)
-    String grantType;
+public class IssueRequest {
 
     @JsonProperty(required = true)
     String clientId;
 
     @JsonProperty(required = true)
     String scope;
+
+    @JsonProperty(required = true)
+    String grantType;
+
+    @JsonProperty(required = true)
+    String sub;
+
+    @JsonProperty(required = true)
+    JsonNode metadata;
 
 }
