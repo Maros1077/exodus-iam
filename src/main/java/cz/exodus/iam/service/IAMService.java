@@ -18,11 +18,11 @@ import cz.exodus.iam.rest.AuthResponse;
 import cz.exodus.iam.rest.CreateIdentityResponse;
 import cz.exodus.iam.rest.RetrieveIdentityResponse;
 import cz.exodus.iam.rest.UpdateIdentityResponse;
+import cz.exodus.jsend.network.exception.JSendClientException;
+import cz.exodus.jsend.network.model.Result;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -134,7 +134,7 @@ public class IAMService {
         return new UpdateIdentityResponse(affectedTags, affectedAuthPoints);
     }
 
-    public AuthResponse auth(IdentityTag identificationTag, AuthPoint authPoint, String application, String clientId, String grantType, String scope) throws IAMException {
+    public AuthResponse auth(IdentityTag identificationTag, AuthPoint authPoint, String application, String clientId, String grantType, String scope) throws Exception {
         ApplicationEntity applicationEntity = getApplication(application);
         if (!oidcClientRepository.existsOidcClientEntityByApplicationAndClientIdAndGrantType(applicationEntity, clientId, grantType)) {
             throw new OidcClientDoesNotExistsException(clientId, application);
@@ -153,8 +153,11 @@ public class IAMService {
             metadata.put("tagType", identificationTag.getType());
             metadata.put("application", application);
 
-            IssueResponse response = stsClient.issueToken(new IssueRequest(clientId, scope, grantType, identityTag.getTagValue(), metadata)).block();
-            return new AuthResponse(response.getToken(), response.getType(), response.getExpiresIn());
+            Result<IssueResponse, JSendClientException> response = stsClient.issueToken(new IssueRequest(clientId, scope, grantType, identityTag.getTagValue(), metadata));
+            if (response.isFailure()) {
+                throw response.getFailure();
+            }
+            return response.mapSuccess(issueResponse -> new AuthResponse(issueResponse.getToken(), issueResponse.getType(), issueResponse.getExpiresIn())).getSuccess();
         } else {
             log.debug("Authentication failed - Wrong value");
             throw new AuthenticationFailedException();

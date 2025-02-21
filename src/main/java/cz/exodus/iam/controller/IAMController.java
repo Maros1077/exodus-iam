@@ -61,13 +61,13 @@ public class IAMController {
     }
 
     @PostMapping(AUTH_PATH)
-    public AuthResponse auth(@RequestBody AuthRequest request, HttpServletResponse response) throws IAMException {
+    public AuthResponse auth(@RequestBody AuthRequest request, HttpServletResponse response) throws Exception {
         log.debug("AUTH START");
         try {
             AuthResponse result = iamService.auth(request.getIdentificationTag(), request.getAuthPoint(), request.getApplication(), request.getClientId(), request.getGrantType(),  request.getScope());
             log.info("AUTH SUCCESSFUL for " + request.getIdentificationTag().getValue());
             return result;
-        } catch (IAMException e) {
+        } catch (Exception e) {
             log.info("AUTH FAILED for " + request.getIdentificationTag().getValue());
             throw e;
         }
