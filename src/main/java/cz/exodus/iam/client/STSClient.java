@@ -7,15 +7,13 @@ import cz.exodus.jsend.network.client.BaseJSendClient;
 import cz.exodus.jsend.network.exception.JSendClientException;
 import cz.exodus.jsend.network.model.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
 public class STSClient extends BaseJSendClient {
 
-    @Value("${service.sts.url}")
-    private static String STS_URL;
+    private static String STS_URL = "http://localhost:8081";
     private static final String STS_ISSUE_ENDPOINT = "/sts/v1/int/issue";
     private static final String SERVICE_NAME = "sts-service";
 

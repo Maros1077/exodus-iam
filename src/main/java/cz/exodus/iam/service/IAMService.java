@@ -140,8 +140,10 @@ public class IAMService {
             throw new OidcClientDoesNotExistsException(clientId, application);
         }
         IdentityTagEntity identityTag;
+        IdentityTagEntity ididTag;
         try {
             identityTag = getIdentity(identificationTag, applicationEntity);
+            ididTag = identityTagRepository.findByIdentityAndTagTypeAndApplication(identityTag.getIdentity(), getTagByType(TagType.IDID.name()), applicationEntity);
         } catch (IdentityNotFoundException e) {
             log.debug("Authentication failed - Identity not found");
             throw new AuthenticationFailedException();
@@ -152,6 +154,7 @@ public class IAMService {
             ObjectNode metadata = objectMapper.createObjectNode();
             metadata.put("tagType", identificationTag.getType());
             metadata.put("application", application);
+            metadata.put("idid", ididTag.getTagValue());
 
             Result<IssueResponse, JSendClientException> response = stsClient.issueToken(new IssueRequest(clientId, scope, grantType, identityTag.getTagValue(), metadata));
             if (response.isFailure()) {
